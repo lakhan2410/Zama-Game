@@ -30,8 +30,8 @@ function createCard(card) {
 
     cardElement.innerHTML = `
         <img class="front-face" src="${card.img}" alt="${card.name} image">
-        <img class="back-face" src="images/card-back.svg" alt="Card Back"> 
-        `;
+        <img class="back-face" src="images/card-back.png" alt="Card Back"> 
+    `;
 
     cardElement.addEventListener('click', flipCard);
     return cardElement;
