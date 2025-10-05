@@ -1,12 +1,14 @@
+/* --- GLOBAL STYLES --- */
 body {
-    font-family: sans-serif;
-    background-color: #3e2723; /* Dark brown background color from your sample */
-    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #3e2723; /* Dark brown background */
+    color: #ffffff;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    padding-top: 20px;
 }
 
 .header {
@@ -14,73 +16,108 @@ body {
     padding: 20px;
 }
 
+h1 {
+    font-size: 2.5em;
+    color: #FFC107; /* Zama yellow highlight */
+    margin-bottom: 0.2em;
+}
+
+/* --- GAME GRID --- */
 .memory-game {
-    width: 700px; /* Adjust grid size as needed */
-    height: 350px;
+    width: 700px;
+    height: 380px; /* Slightly taller for better card spacing */
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
     margin: 20px auto;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1); /* Slight background for the board area */
+    border-radius: 10px;
 }
 
+/* --- CARD BASE STYLES --- */
 .memory-card {
-    width: calc(25% - 10px); /* 4 columns minus margin */
-    height: calc(100% / 2 - 10px); /* 2 rows minus margin */
-    margin: 5px;
+    width: calc(25% - 20px); /* Adjusting margin for 4 columns */
+    height: calc(50% - 20px); /* Adjusting margin for 2 rows */
+    margin: 10px;
     position: relative;
     transform: scale(1);
     transform-style: preserve-3d;
-    transition: transform 0.5s;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.5s, opacity 0.5s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    cursor: pointer;
 }
 
+/* --- CARD INTERACTION --- */
 .memory-card:active {
     transform: scale(0.97);
     transition: transform 0.2s;
 }
 
-/* FLIP EFFECT */
 .memory-card.flip {
     transform: rotateY(180deg);
 }
 
+/* --- CARD FACES --- */
 .front-face, .back-face {
     width: 100%;
     height: 100%;
-    padding: 10px;
     position: absolute;
     border-radius: 8px;
     backface-visibility: hidden;
-    pointer-events: none; /* Prevents image clicks from interfering with card clicks */
+    pointer-events: none;
+    box-sizing: border-box;
 }
 
 .front-face {
     transform: rotateY(180deg);
+    background-color: #fff; /* White background for image cards */
 }
 
 .back-face {
-    background-color: #ffc107; /* Yellow card back color from your sample */
-    border: 3px solid white;
+    background-color: #FFC107; /* Bright Zama yellow */
+    border: 3px solid #f9f9f9;
 }
 
-.back-face img, .front-face img {
+.front-face img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensures the whole image is visible */
+    object-fit: cover; /* Fill the card area nicely */
+    border-radius: 5px;
 }
 
-/* Matching and Disabled Styles */
+/* --- ANIMATION AND MATCHING --- */
+
+/* 1. COOL MATCH ANIMATION */
+@keyframes matched-fade-out {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(0.5); opacity: 0; }
+}
+
 .memory-card.match {
-    /* Optionally visually mark matched cards */
+    /* Apply the animation, then hide and disable */
+    animation: matched-fade-out 0.8s forwards; /* 'forwards' keeps the final state */
     pointer-events: none;
-    opacity: 0.9;
 }
 
 .memory-card.disable {
-    pointer-events: none; /* Disable interaction during a check */
+    pointer-events: none; /* Disable interaction during a match check */
 }
 
-.footer {
-    padding: 20px;
+/* --- FOOTER/BUTTON --- */
+.footer button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #FFC107;
+    border: 2px solid #FFC107;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.footer button:hover {
+    background-color: #1a1a1a;
 }
