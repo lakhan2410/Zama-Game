@@ -1,0 +1,86 @@
+body {
+    font-family: sans-serif;
+    background-color: #3e2723; /* Dark brown background color from your sample */
+    color: white;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.memory-game {
+    width: 700px; /* Adjust grid size as needed */
+    height: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+    margin: 20px auto;
+}
+
+.memory-card {
+    width: calc(25% - 10px); /* 4 columns minus margin */
+    height: calc(100% / 2 - 10px); /* 2 rows minus margin */
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.memory-card:active {
+    transform: scale(0.97);
+    transition: transform 0.2s;
+}
+
+/* FLIP EFFECT */
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.front-face, .back-face {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    position: absolute;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    pointer-events: none; /* Prevents image clicks from interfering with card clicks */
+}
+
+.front-face {
+    transform: rotateY(180deg);
+}
+
+.back-face {
+    background-color: #ffc107; /* Yellow card back color from your sample */
+    border: 3px solid white;
+}
+
+.back-face img, .front-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the whole image is visible */
+}
+
+/* Matching and Disabled Styles */
+.memory-card.match {
+    /* Optionally visually mark matched cards */
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.memory-card.disable {
+    pointer-events: none; /* Disable interaction during a check */
+}
+
+.footer {
+    padding: 20px;
+}
