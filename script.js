@@ -5,7 +5,7 @@ const cardImages = [
     { name: 'office', img: 'images/modern-office.jpg' },
     { name: 'z-logo', img: 'images/simple-z-logo.jpg' },
 ];
-
+#ZAMA
 // 2. Create the full deck (8 cards - 2 of each unique image)
 let cards = [...cardImages, ...cardImages];
 
